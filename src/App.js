@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import Title from './components/Title';
+import Nav from './components/Nav';
+import Hero from './components/Hero';
+import Card from './components/Card';
+import Footer from './components/Footer';
+import 'font-awesome/css/font-awesome.min.css';
+import './style.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import navData from './data/navData';
+import heroData from './data/heroData';
+import cardData from './data/cardData';
+
+export default function App() {
+	const navEl = navData.map(navLi => {return(<Nav key={navLi.key} {...navLi} />)});
+	const heroEl = heroData.map(heroItems => {return(<Hero key={heroItems.id} {...heroItems} />)});
+	const cardEl = cardData.map(cardLi => {return(<Card key={cardLi.id} {...cardLi} />)});
+	return(
+		<div className="page-wrapper">
+			<div className="page-content">
+				<nav className='d-flex ai-c jc-sb'>
+					<Title 
+						href="#"
+						logo='./img/logo.png'
+						title="Tanim Mahbub"
+					/>
+					<ul className="d-flex ai-c">{navEl}</ul>
+				</nav>
+
+				<main>
+					{heroEl}
+					<div className="card--list">{cardEl}</div>
+				</main>
+			</div>
+			<Footer />
+		</div>
+	);
 }
-
-export default App;
